@@ -1,0 +1,24 @@
+<h1>あたらしいキモチ</h1>
+
+<%= form_with model: @emotion, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :shape %>
+    <%= f.select :shape, [['球体',1],['立方体',2]], {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :color %>
+    <%= f.color_field :color, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "作成", class: 'btn btn-success' %>
+<% end %>
+
+<div id="emotion-preview"></div>
+
+<%= javascript_include_tag 'emotion_preview', 'data-turbolinks-track': 'reload' %>
