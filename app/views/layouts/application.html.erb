@@ -19,20 +19,20 @@
   </head>
 
   <body>
-    <%= render "layouts/header" %>
+    <div class="wrapper">
+      <%= render "layouts/header" %>
 
-    <% flash.each do |message_type, message| %>
-      <article class="message is-<%= message_type %>">
-        <div class="message-body">
-          <%= message %>
-        </div>
-      </article>
-    <% end %>
+      <% flash.each do |message_type, message| %>
+        <article class="message is-<%= message_type %>">
+          <div class="message-body">
+            <%= message %>
+          </div>
+        </article>
+      <% end %>
 
-    <section class="section">
       <%= yield %>
-    </section>
-    <%= render "layouts/footer" %>
 
+      <%= render "layouts/footer" %>
+    </div>
   </body>
 </html>
