@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_save :downcase_email
+  before_save :downcase_email, :modify_black_name
   has_many :emotions
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -12,5 +12,9 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email.downcase!
+  end
+
+  def modify_black_name
+    self.name = "名無し" if self.name.blank?
   end
 end

@@ -14,10 +14,17 @@ feature 'ユーザー管理機能' do
       let(:email){ 'aaa@example.com' }
       let(:password){ 'password' }
       let(:password_confirmation){ 'password' }
+
       scenario 'ユーザー新規作成、(ログインして)emotions#indexに飛ぶ' do
         expect(current_path).to eq emotions_path
-        #TODO: expect(logged_in?).to be_truthy
-        expect(User.find_by(email:email)).to be_truthy
+      end
+
+      scenario '正しくユーザ情報が記録されている' do
+        user = User.find_by(email:email)
+        expect(user).to be_truthy
+        expect(user.email).to eq email
+        expect(user.name).to eq "名無し"
+        expect(user.admin).to eq false
       end
     end
 
@@ -25,9 +32,14 @@ feature 'ユーザー管理機能' do
       let(:email){ '@example.com' } # 無効なアドレス
       let(:password){ 'pass' } # 無効なパスワード
       let(:password_confirmation){ 'a' } # 確認パスワードが一致しない
+
       scenario '新規登録ページを再表示して、警告が出る' do
         expect(current_path).to eq new_user_path
         expect(page).to have_selector '.error-message', count: 3
+      end
+
+      scenario 'ユーザは作成されない' do
+        expect(User.find_by(email:email)).to be_nil
       end
     end
   end
