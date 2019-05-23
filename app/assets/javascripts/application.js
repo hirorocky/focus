@@ -13,5 +13,5 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-// require turbolinks
+//= require bulma-extensions/bulma-steps/dist/js/bulma-steps
 // require_tree .

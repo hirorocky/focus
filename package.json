@@ -1,5 +1,7 @@
 {
   "name": "src",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bulma-extensions": "^6.2.7"
+  }
 }

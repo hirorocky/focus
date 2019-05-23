@@ -11,5 +11,4 @@ WORKDIR /src
 ADD Gemfile Gemfile
 
 RUN bundle install --without production
-RUN bundle install
 ENV RUBYOPT -EUTF-8
