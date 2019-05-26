@@ -210,9 +210,8 @@ ja:
     emotion:
       id: ID
       name: 名前
-      shape: カタチ
-      color_r: 色(赤)
-      color_g: 色(緑)
-      color_b: 色(青)
+      shape: 形
+      color: 色
+      detail: 感想・メモ
       created_at: 登録日時
       updated_at: 更新日時

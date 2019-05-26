@@ -133,9 +133,9 @@
             </p>
           </div>
           <div class="field">
-            <label class="label">感想・メモ</label>
+            <%= f.label :detail, '感想・メモ', class: 'label' %>
             <div class="control">
-              <textarea class="textarea" placeholder="Textarea"></textarea>
+              <%= f.text_area :detail, class: 'textarea' %>
             </div>
           </div>
         </div>

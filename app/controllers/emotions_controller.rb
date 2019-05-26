@@ -32,7 +32,7 @@ class EmotionsController < ApplicationController
 
   private
   def emotion_params
-    params.require(:emotion).permit(:shape, :color, :name)
+    params.require(:emotion).permit(:shape, :color, :name, :detail)
   end
 
   def find_my_emotion(emotion_id)
