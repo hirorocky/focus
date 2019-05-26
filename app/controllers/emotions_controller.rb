@@ -1,7 +1,11 @@
 class EmotionsController < ApplicationController
   def index
-    @emotions = current_user.emotions
+    @emotions = current_user.todays_emotions
+  end
 
+  def index_all
+    @emotions = current_user.emotions
+    render :index
   end
 
   def new

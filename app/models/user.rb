@@ -17,4 +17,11 @@ class User < ApplicationRecord
   def modify_black_name
     self.name = "名無し" if self.name.blank?
   end
+
+  def todays_emotions(today=Time.zone.today)
+    emotions = self.emotions
+    max_pick = 4
+    pick_size = emotions.length <= max_pick ? emotions.length : max_pick
+    emotions.sample(pick_size, random: Random.new(today.to_time.to_i))
+  end
 end

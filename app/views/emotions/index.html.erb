@@ -18,12 +18,15 @@
 
       <% @emotions.each do |emotion| %>
         <div class="box emotion"> <!-- .emotionはテスト用 -->
-          <div class="media-left" style="float:left" id="emotion-<%= emotion.id %>"></div>
+          <div class="media-left" style="float: left;" id="emotion-<%= emotion.id %>"></div>
 
           <div class="media-content">
             <div class="content">
-              <h5><%= emotion.name %></h5>
-              <h6><%= emotion.created_at %></h6>
+              <h4 class="title is-4"><%= emotion.name %></h4>
+              <h6 class="subtitle is-6"><%= emotion.created_at_with_format %></h6>
+              <div class="">
+                <%= emotion.detail %>
+              </div>
             </div>
             <nav class="level-right">
               <%= link_to "削除", emotion,
