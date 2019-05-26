@@ -48,7 +48,7 @@ feature 'キモチ管理機能' do
       log_in_as user_having_no_emotion
     end
 
-    scenario 'newページでフォームに入力しpostしindexページにリダイレクト' do
+    xscenario 'newページでフォームに入力しpostしindexページにリダイレクト' do
       visit new_emotion_path
       fill_in name:'emotion[name]', with: 'test'
       click_button '作成'

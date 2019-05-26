@@ -1,8 +1,9 @@
+<% provide :current_page, 'emotions' %>
 <section class="section">
   <div class="container">
-    <div class="level">
-      <div class="level-left"><h1 class="title">過去のキモチ</h1></div>
-      <div class="level-right"><%= link_to '新しいキモチ', new_emotion_path, class: 'button is-link' %></div>
+    <div class="level is-hidden-desktop">
+      <div class="level-left"><h2 class="title is-3">キモチを懐かしむ</h2></div>
+      <div class="level-right"><%= link_to 'キモチと向き合う', new_emotion_path, class: 'button is-link' %></div>
     </div>
     <% if @emotions.count == 0 %>
       <div class="level" id="introduce-create-emotion">

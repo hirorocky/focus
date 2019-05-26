@@ -3,6 +3,7 @@
 // TODO: emotion#new,indexで共通化する
 let shape = $('select[name="emotion[shape]"]').val();
 let emo_color = $('input[name="emotion[color]"]').val();
+let first_step;
 
 function setup() {
     $('select[name="emotion[shape]"]').change(() => {
@@ -14,18 +15,22 @@ function setup() {
 
     let canvas = createCanvas(300,300, WEBGL);
     canvas.parent('emotion-preview');
+    $("#emotion-preview canvas").css("border-radius","6px");
 }
 
 function draw() {
-    background(250);
+    background(0);
 
     rotateZ(frameCount * 0.001);
     rotateX(frameCount * 0.001);
     rotateY(frameCount * 0.001);
 
+    ambientLight(50);
+    pointLight(250, 250, 250, 100, 100, 30);
+
     stroke(emo_color);
     fill(emo_color);
-    console.log(shape);
+
     switch (shape) {
         case "1":
             sphere(80);

@@ -4,7 +4,7 @@
     <title>FOCUS</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag('favicon.ico') %>
     <%= Gon::Base.render_data %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,7 +23,7 @@
       <%= render "layouts/header" %>
 
       <% flash.each do |message_type, message| %>
-        <article class="message is-<%= message_type %>">
+        <article class="message is-<%= message_type %>", style="margin-bottom: 0px">
           <div class="message-body">
             <%= message %>
           </div>

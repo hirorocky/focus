@@ -1,10 +1,18 @@
 <section class="hero is-fullheight-with-navbar">
   <div class="hero-body home-hero">
     <div class="container">
-      <h1 class="title has-text-white is-size-1">
-        あなたのキモチ、カタチしてみませんか？
+      <h1 style="text-shadow: 4px 4px 2px #2E2F30" class="title has-text-white is-size-2">
+        あなたの中にあるもやもやしたキモチ、<br>
+        カタチしてみませんか？
       </h1>
-      <a href="<%= new_user_path %>", class="button has-icons-left is-large is-rounded is-white is-pulled-right">
+      <a href="<%= new_emotion_path %>", class="button has-icons-left is-large is-rounded is-white is-pulled-right">
+        <span class="icon">
+          <i class="fas fa-hand-holding-heart"></i>
+        </span>
+        <span>試してみる</span>
+      </a>
+      <br><br><br>
+      <a href="<%= new_user_path %>", class="button has-icons-left is-large is-rounded is-primary is-pulled-right">
         <span class="icon">
           <i class="fas fa-user-plus"></i>
         </span>

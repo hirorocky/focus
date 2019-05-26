@@ -14,4 +14,5 @@
 //= require rails-ujs
 //= require activestorage
 //= require bulma-extensions/bulma-steps/dist/js/bulma-steps
+//= require bulma-extensions/bulma-slider/dist/js/bulma-slider
 // require_tree .

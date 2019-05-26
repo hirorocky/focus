@@ -14,7 +14,8 @@ class EmotionsController < ApplicationController
       flash[:success] = '新しいキモチを登録しました。'
       redirect_to emotions_url
     else
-      render :new
+      flash[:danger] = '情報が不足しています！'
+      redirect_to new_emotion_url
     end
   end
 
