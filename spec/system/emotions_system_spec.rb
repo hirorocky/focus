@@ -5,7 +5,7 @@ feature 'キモチ管理機能' do
   let!(:user_having_no_emotion) { create(:user, id: 2, name:'ゲスト2', email: 'bbb@example.com', password: 'password') }
   background do
     3.times do |i|
-      create(:emotion, name:i.to_s, user_id: 1)
+      create(:emotion, name:i.to_s, user_id: 1, id:i+1)
     end
   end
 
