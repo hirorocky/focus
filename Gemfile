@@ -27,12 +27,17 @@ group :development, :test do
   gem 'mail-iso-2022-jp' # 日本語のメールを送るためのgem
   gem 'byebug',  '9.0.6', platform: :mri
   gem 'factory_bot_rails', '~> 4.11'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
 end
 
 group :development do
   gem 'listen'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
