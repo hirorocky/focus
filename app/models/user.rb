@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :validatable
   before_save :downcase_email, :modify_black_name
   has_many :emotions
 
@@ -7,7 +11,6 @@ class User < ApplicationRecord
                     length: { maximum: 200 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  has_secure_password # 生成時に確認、パスワードが空の場合は通さない
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def downcase_email

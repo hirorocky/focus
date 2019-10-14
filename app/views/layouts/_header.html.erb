@@ -6,7 +6,8 @@
       <span class="has-text-weight-bold is-size-3">CUS</span>
     </a>
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+      data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -16,7 +17,8 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <% current_page_style = 'background-color:#fee;font-weight:600' %>
-      <a class="navbar-item has-icons-left" href="<%= new_emotion_path %>" style="<%= current_page_style if yield(:current_page)=='new_emotion' %>">
+      <a class="navbar-item has-icons-left" href="<%= new_emotion_path %>"
+        style="<%= current_page_style if yield(:current_page)=='new_emotion' %>">
         <span class="icon">
           <i class="fas fa-hand-holding-heart"></i>
         </span>
@@ -24,7 +26,8 @@
           キモチと向き合う
         </span>
       </a>
-      <a class="navbar-item has-icons-left" href="<%= emotions_path %>" style="<%= current_page_style if yield(:current_page)=='emotions' %>">
+      <a class="navbar-item has-icons-left" href="<%= emotions_path %>"
+        style="<%= current_page_style if yield(:current_page)=='emotions' %>">
         <span class="icon">
           <i class="fas fa-book"></i>
         </span>
@@ -32,7 +35,8 @@
           キモチを懐かしむ
         </span>
       </a>
-      <a class="navbar-item has-icons-left" href="/about" style="<%= current_page_style if yield(:current_page)=='about' %>">
+      <a class="navbar-item has-icons-left" href="/about"
+        style="<%= current_page_style if yield(:current_page)=='about' %>">
         <span class="icon">
           <i class="fas fa-info-circle"></i>
         </span>
@@ -45,11 +49,11 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <% if logged_in? %>
-            <%= link_to 'ログアウト', '/logout', method: :delete, class: 'button is-light' %>
+          <% if user_signed_in? %>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'button is-light' %>
           <% else %>
-            <%= link_to '新規登録', new_user_path, class: 'button is-primary' %>
-            <%= link_to 'ログイン', '/login', class: 'button is-light' %>
+          <%= link_to '新規登録', new_user_registration_path, class: 'button is-primary' %>
+          <%= link_to 'ログイン', new_user_session_path, class: 'button is-light' %>
           <% end %>
         </div>
       </div>
@@ -58,15 +62,15 @@
 </nav>
 
 <script>
-    $(document).ready(function() {
+  $(document).ready(function () {
 
-        // Check for click events on the navbar burger icon
-        $(".navbar-burger").click(function() {
+    // Check for click events on the navbar burger icon
+    $(".navbar-burger").click(function () {
 
-            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-            $(".navbar-burger").toggleClass("is-active");
-            $(".navbar-menu").toggleClass("is-active");
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
 
-        });
     });
+  });
 </script>
