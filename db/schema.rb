@@ -10,20 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_080145) do
+ActiveRecord::Schema.define(version: 2019_10_14_103423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "emotions", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "shape", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "color", null: false
     t.bigint "user_id", default: 0, null: false
-    t.text "detail"
+    t.text "context", default: ""
     t.index ["user_id"], name: "index_emotions_on_user_id"
+  end
+
+  create_table "fragments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "tag_id", null: false
+    t.bigint "emotion_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id"], name: "index_fragments_on_emotion_id"
+    t.index ["tag_id"], name: "index_fragments_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,4 +62,7 @@ ActiveRecord::Schema.define(version: 2019_10_13_080145) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "fragments", "emotions"
+  add_foreign_key "fragments", "tags"
+  add_foreign_key "tags", "users"
 end
