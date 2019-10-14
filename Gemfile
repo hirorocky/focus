@@ -31,6 +31,8 @@ end
 
 group :development do
   gem 'listen'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
@@ -42,5 +44,4 @@ group :test do
 end
 
 group :production do
-  gem 'fog', '1.42'
 end
