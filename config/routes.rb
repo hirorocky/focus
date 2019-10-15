@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   get 'emotions-all', to: 'emotions#index_all'
 
-  resources :emotions, only: [:index, :new, :destroy, :create]
+  resources :tags, only: %i[index destroy create]
+  resources :emotions, only: %i[new index destroy create]
 end

@@ -1,0 +1,12 @@
+<h1 class="title">Tags#index</h1>
+<%= form_with model: @new_tag, local: true do |f| %>
+<%=   f.label :name %>
+<%=   f.text_field :name %>
+<%=   f.submit "新規登録" %>
+<% end %>
+
+<% @tags.each do |tag| %>
+<%= tag.name %>
+<%= link_to '削除', tag_path(tag.id), method: :delete %>
+<br />
+<% end %>
