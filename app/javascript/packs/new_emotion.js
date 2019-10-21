@@ -1,10 +1,7 @@
 /* eslint no-console: 0 */
 
 import Vue from 'vue/dist/vue.esm'
-import Vuetify from 'vuetify'
 import EmotionRegisterForm from '../components/emotion_register_form'
-
-Vue.use(Vuetify);
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
