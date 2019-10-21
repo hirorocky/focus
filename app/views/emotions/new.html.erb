@@ -1,253 +1,39 @@
-<% provide :current_page, 'new_emotion' %>
 <section class="section">
   <div class="container">
     <h1 class="title is-hidden-desktop">キモチと向き合う</h1>
-
-    <div class="steps" id="stepsDemo">
-      <div class="step-item is-active">
-        <div class="step-marker">1</div>
-        <div class="step-details">
-          <p class="step-title">見つける</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-marker">2</div>
-        <div class="step-details">
-          <p class="step-title">味わう</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-marker">3</div>
-        <div class="step-details">
-          <p class="step-title">名付ける</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-marker">4</div>
-        <div class="step-details">
-          <p class="step-title">一緒に過ごす</p>
-        </div>
-      </div>
-
-
-      <div class="steps-content">
-        <!--  1-->
-        <div class="step-content is-active">
-          <div class="container">
-            <div class="level">
-              <div class="level-item has-text-centered">
-                まずはリラックスしてください。<br>
-                <br>
-                落ち着いたらもやもやしたキモチを探してみましょう。<br>
-                首のあたり、胸、腹、もしかしたら背中かもしれません。<br>
-                <br>
-                見つけたら「次へ」を押してください。
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!--    2-->
-        <div class="step-content">
+    <div id='form'>
+      <emotion-register-form inline-template>
+        <div id="new-emotion-form">
           <%= form_with model: @emotion, local: true do |f| %>
+          <div id="create-emotion">
+            <%= f.label :name %>
+            <%= f.text_field :name %>
 
-            <div class="container">
-              <div class="level">
-                <div class="level-item has-text-centered">
-                  あなたが見つけた、もやもやしたキモチ。<br>
-                  怖いかもしれませんが、少しだけそのキモチを味見してみましょう。<br>
-                  <br>
-                  どんな形をしていますか。<br>
-                  どんな色ですか。動いていますか、それとも止まっているでしょうか。<br>
-                  <br>
-                  あなたが感じるキモチを画面上で再現してみてください。
-                </div>
-              </div>
-              <div class="field is-horizontal">
-                <div class="field-label">
-                  <%= f.label :shape, class: 'label' %>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <div class="select">
-                        <%= f.select :shape, [['球体', 1], ['立方体', 2]], {} %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <%= f.label :color %>
+            <%= f.color_field :color %>
 
-              <div class="field is-horizontal">
-                <div class="field-label">
-                  <%= f.label :color, class: 'label' %>
-                </div>
-                <div class="field-body">
-                  <div class="field">
-                    <%= f.color_field :color, value: '#ffffff' %>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <%= f.label :context %>
+            <%= f.text_area :context %><br>
 
-        </div>
-        <!--    3-->
-        <div class="step-content">
-          <div class="level">
-            <div class="level-item has-text-centered">
-              あなたが見つけた、もやもやしたキモチ。<br>
-              正体が少し明らかになったでしょうか。<br>
-              <br>
-              あなたはそのキモチを早く消してしまいたいと思っているかもしれません。<br>
-              しかし、そのキモチはあなた自身を形作る大切なもの。<br>
-              消そうとすればするほど、そのキモチは消されまいと強く反発するはずです。<br>
-              <br>
-              消せないならば、いっそ仲良くなってみましょう。<br>
-              あなたの大切なキモチに名前をつけて親近感アップです！<br>
-            </div>
+            <input v-model="input_tag" placeholder="タグ" />
+            <input v-model="input_content" placeholder="タグに関連した気持ち" /><br>
+            <% @tags.map(&:name).each do |name| %>
+            <a v-on:click="onTagSuggestClicked"><%= name %></a>
+            <% end %>
+            <a class="button" v-on:click="subscribe">フラグメントを追加</a>
           </div>
-          <div class="field">
-            <%= f.label :name, class: 'label' %>
-            <div class="control">
-              <%= f.text_field :name, class: 'input' %>
-            </div>
+          <div id="fragment-list">
+            <li v-for="fragment in fragments" v-bind:key="fragment.id">
+              {{ fragment.tag }}:{{ fragment.content }} <button v-on:click="deleteFragment(fragment)">削除</button>
+
+              <input type="hidden" name="emotion[fragments][]" v-bind:value="fragment.tag + ',' + fragment.content" />
+            </li>
           </div>
+          <%= f.submit %>
+          <% end %>
         </div>
-        <!--    4-->
-        <div class="step-content">
-          <div class="level">
-            <p class="level-item has-text-centered">
-              あなたが名付けた、大切なキモチ。<br>
-              いつかそのキモチと良きパートナーになるために、あいさつから始めましょう。<br>
-              <br>
-              そのキモチはあなたを傷つけるものを察知し、<br>
-              「危ないよ」「逃げなよ」と教えてくれています。<br>
-              <br>
-              そのキモチに「教えてくれてありがとう」「でももう大丈夫だよ」と<br>
-              何度も語りかけてみましょう。<br>
-              心からの言葉でなくても構いません。<br>
-              <br>
-              この体験を始める前と今では何か変化がありましたか？<br>
-              何もなかったとしても気にしないでください。<br>
-              後でこの体験を思い出して懐かしむために感想を書いておきましょう。<br>
-            </p>
-          </div>
-          <div class="field">
-            <%= f.label :detail, '感想・メモ', class: 'label' %>
-            <div class="control">
-              <%= f.text_area :detail, class: 'textarea' %>
-            </div>
-          </div>
-        </div>
-        <div id="emotion-preview" style="text-align: center;display: none;margin-top: 2rem"></div>
-      </div>
-      <div class="steps-actions" style="margin-bottom: 2rem">
-        <div class="steps-action">
-          <a href="#" data-nav="previous" class="button is-light is-large">前へ</a>
-        </div>
-        <div class="steps-action">
-          <a href="#" id="next-btn" data-nav="next" class="button is-light is-large">次へ</a>
-          <%= f.submit "保存", id: 'submit-btn', class: 'button is-link is-large', style: 'display: none' %>
-        </div>
-        <% end %>
-      </div>
+      </emotion-register-form>
     </div>
   </div>
-</section>
-    <%= javascript_include_tag 'emotion_preview' %>
-
-<script>
-  // p5.jsキャンパス、次へボタンの表示切り替え（ON/OFF）
-  document.onready = ()=>{
-      $("a[data-nav='previous']").on("click",()=>{
-          if($("div[data-step-id='1']").hasClass("is-active")){
-              $("#emotion-preview").css("display","none");
-          }
-          $("#next-btn").css("display","block");
-          $("#submit-btn").css("display", "none");
-      });
-  };
-
-  let step = bulmaSteps.attach(undefined,{
-      "beforeNext": () => {
-          $("#emotion-preview").css("display","block");
-      },
-      "onFinish": () => {
-          $("#next-btn").css("display","none");
-          $("#submit-btn").css("display", "block");
-      }
-  });
-
-  // Find output DOM associated to the DOM element passed as parameter
-  function findOutputForSlider( element ) {
-      var idVal = element.id;
-      outputs = document.getElementsByTagName( 'output' );
-      for( var i = 0; i < outputs.length; i++ ) {
-          if ( outputs[ i ].htmlFor == idVal )
-              return outputs[ i ];
-      }
-  }
-
-  function getSliderOutputPosition( slider ) {
-      // Update output position
-      var newPlace,
-          minValue;
-
-      var style = window.getComputedStyle( slider, null );
-      // Measure width of range input
-      sliderWidth = parseInt( style.getPropertyValue( 'width' ), 10 );
-
-      // Figure out placement percentage between left and right of input
-      if ( !slider.getAttribute( 'min' ) ) {
-          minValue = 0;
-      } else {
-          minValue = slider.getAttribute( 'min' );
-      }
-      var newPoint = ( slider.value - minValue ) / ( slider.getAttribute( 'max' ) - minValue );
-
-      // Prevent bubble from going beyond left or right (unsupported browsers)
-      if ( newPoint < 0 ) {
-          newPlace = 0;
-      } else if ( newPoint > 1 ) {
-          newPlace = sliderWidth;
-      } else {
-          newPlace = sliderWidth * newPoint;
-      }
-
-      return {
-          'position': newPlace + 'px'
-      }
-  }
-
-  document.addEventListener( 'DOMContentLoaded', function () {
-      // Get all document sliders
-      var sliders = document.querySelectorAll( 'input[type="range"].slider' );
-      [].forEach.call( sliders, function ( slider ) {
-          var output = findOutputForSlider( slider );
-          if ( output ) {
-              if ( slider.classList.contains( 'has-output-tooltip' ) ) {
-                  // Get new output position
-                  var newPosition = getSliderOutputPosition( slider );
-
-                  // Set output position
-                  output.style[ 'left' ] = newPosition.position;
-              }
-
-              // Add event listener to update output when slider value change
-              slider.addEventListener( 'input', function( event ) {
-                  if ( event.target.classList.contains( 'has-output-tooltip' ) ) {
-                      // Get new output position
-                      var newPosition = getSliderOutputPosition( event.target );
-
-                      // Set output position
-                      output.style[ 'left' ] = newPosition.position;
-                  }
-
-                  // Update output with slider value
-                  output.value = event.target.value;
-              } );
-          }
-      } );
-  } );
-
-</script>
+</section> <%= javascript_pack_tag 'new_emotion' %>
+<%= stylesheet_pack_tag 'new_emotion' %>

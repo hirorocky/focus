@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FOCUS</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= favicon_link_tag('favicon.ico') %>
-    <%= Gon::Base.render_data %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/regular.css" integrity="sha384-hCIN6p9+1T+YkCd3wWjB5yufpReULIPQ21XA/ncf3oZ631q2HEhdC7JgKqbk//4+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css" integrity="sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
-    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+<head>
+  <title>FOCUS</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= favicon_link_tag('favicon.ico') %>
+  <%= Gon::Base.render_data %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <body>
-    <div class="wrapper">
-      <%= render "layouts/header" %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css"
+    integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/regular.css"
+    integrity="sha384-hCIN6p9+1T+YkCd3wWjB5yufpReULIPQ21XA/ncf3oZ631q2HEhdC7JgKqbk//4+" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css"
+    integrity="sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J" crossorigin="anonymous">
+  <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-      <% flash.each do |message_type, message| %>
-        <article class="message is-<%= message_type %>", style="margin-bottom: 0px">
-          <div class="message-body">
-            <%= message %>
-          </div>
-        </article>
-      <% end %>
+<body>
+  <div class="wrapper">
+    <%= render "layouts/header" %>
 
-      <%= yield %>
+    <% flash.each do |message_type, message| %>
+    <article class="message is-<%= message_type %>" , style="margin-bottom: 0px">
+      <div class="message-body">
+        <%= message %>
+      </div>
+    </article>
+    <% end %>
 
-      <%= render "layouts/footer" %>
-    </div>
-  </body>
+    <%= yield %>
+
+    <%= render "layouts/footer" %>
+  </div>
+</body>
+
 </html>

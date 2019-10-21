@@ -17,9 +17,9 @@ class TagsController < ApplicationController
     tag = current_user.tags.find(params[:id])
     if tag
       tag.destroy
-      flash[:success] =  "キモチ「#{tag.name}」を削除しました。"
+      flash[:success] = "タグ「#{tag.name}」を削除しました。"
     else
-      flash[:danger] = "キモチを削除しようとしましたが、指定されたキモチが見つかりませんでした。"
+      flash[:danger] = 'タグを削除しようとしましたが、指定されたキモチが見つかりませんでした。'
     end
     redirect_to tags_url
   end

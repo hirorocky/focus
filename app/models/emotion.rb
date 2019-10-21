@@ -14,4 +14,15 @@ class Emotion < ApplicationRecord
   def created_at_with_format
     self.created_at.strftime('%Y/%m/%d %H:%M:%S')
   end
+
+  def fragments_tag_content_pairs
+    fragments = self.fragments
+    result = []
+    fragments.each do |fragment|
+      tag_name = self.tags.find(fragment.tag_id).name
+      content = fragment.content
+      result << {tag: tag_name, content: content}
+    end
+    result
+  end
 end
