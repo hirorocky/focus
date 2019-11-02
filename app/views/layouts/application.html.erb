@@ -25,18 +25,24 @@
   <div class="wrapper">
     <%= render "layouts/header" %>
 
-    <% flash.each do |message_type, message| %>
-    <article class="message is-<%= message_type %>" , style="margin-bottom: 0px">
-      <div class="message-body">
-        <%= message %>
-      </div>
-    </article>
-    <% end %>
+    <div id="vue-top">
+      <!-- <v-app> -->
 
-    <%= yield %>
+      <% flash.each do |message_type, message| %>
+      <article class="message is-<%= message_type %>" , style="margin-bottom: 0px">
+        <div class="message-body">
+          <%= message %>
+        </div>
+      </article>
+      <% end %>
+
+      <%= yield %>
+      <!-- </v-app> -->
+    </div>
 
     <%= render "layouts/footer" %>
   </div>
 </body>
+<%= javascript_pack_tag 'application' %>
 
 </html>

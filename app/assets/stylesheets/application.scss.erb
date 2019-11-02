@@ -13,17 +13,20 @@ $message-body-radius: 0px;
 @import "bulma";
 @import "bulma-extensions/bulma-steps/dist/css/bulma-steps.sass";
 @import "bulma-extensions/bulma-slider/dist/css/bulma-slider.min.css";
+@import '@simonwep/pickr/dist/themes/classic.min.css';
 
 .wrapper{
 min-height: 100vh;
 position: relative;/*←相対位置*/
-padding-bottom: 120px;/*←footerの高さ*/
+padding-bottom: 1.5rem;/*←footerの高さ*/
 box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
 }
 
+.footer{
+padding: 1.5rem 2rem;
+}
 footer{
 width: 100%;
-height: 0px;
 position: absolute;/*←絶対位置*/
 bottom: 0; /*下に固定*/
 }
@@ -35,4 +38,8 @@ background-size: cover;
 
 hr{
 margin: 0.5rem 0;
+}
+
+.navbar-brand{
+height: 3.25rem;
 }

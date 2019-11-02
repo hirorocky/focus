@@ -2,13 +2,21 @@
   "name": "src",
   "private": true,
   "dependencies": {
+    "@mdi/font": "^4.5.95",
     "@rails/webpacker": "^4.0.7",
+    "@simonwep/pickr": "^1.4.6",
     "bulma-extensions": "^6.2.7",
+    "material-design-icons-iconfont": "^5.0.1",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuetify": "^2.1.7"
   },
   "devDependencies": {
+    "deepmerge": "^4.2.2",
+    "fibers": "^4.0.2",
+    "sass": "^1.23.3",
+    "sass-loader": "^8.0.0",
     "webpack-dev-server": "^3.8.2"
   }
 }

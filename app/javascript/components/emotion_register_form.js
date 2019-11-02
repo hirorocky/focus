@@ -6,15 +6,20 @@ export default {
       input_content: "",
       input_tag: "",
       input_context: "",
+      color: "",
     };
   },
   methods: {
-    subscribe: function (event) {
-      this.fragments.push({
-        tag: this.input_tag,
-        content: this.input_content,
-        id: this.nextId()
-      });
+    addFragment: function (event) {
+      const tag = this.input_tag;
+      const content = this.input_content;
+      if (tag !== "" && content !== "") {
+        this.fragments.push({
+          tag: this.input_tag,
+          content: this.input_content,
+          id: this.nextId()
+        });
+      }
     },
     nextId: function () {
       return ++this.recent_id;
@@ -25,6 +30,18 @@ export default {
     deleteFragment: function (fragment) {
       const index = this.fragments.indexOf(fragment);
       this.fragments.splice(index, 1);
+    }
+  },
+  computed: {
+    is_show_add_fragment_btn: function () {
+      const tag = this.input_tag;
+      const content = this.input_content;
+      if (tag !== "" && content !== "") {
+        return true;
+      } else {
+        return false;
+      }
+
     }
   }
 }

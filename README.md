@@ -1,14 +1,19 @@
-# installation
-docker build -t focus_image .
+Focus
+====
+## 概要
+・現在の状況と感情に集中し、言葉にできます。(Focus機能)
+・それと同時に過去の感情を自然に振り返ることができます。(Bokeh機能)
+FocusとBokehによって今の感情に変化をもたらすことを期待するサービスです。
 
-docker run -it -v C:/dev/rails/focus/src:/src --name focus -p 8080:3000 focus_image bash
+## サイトURL
+https://focus-on-yourself.herokuapp.com/
 
-docker exec -it focus bash
+## 開発環境へのインストール
+git clone
+bundle install
+rails webpacker:install
+rails webpacker:install:vue
+(postgresqlを起動、環境変数にユーザ、パスワードを登録)
 
-# push to heroku
-## remind
-- bundle install
-
-## execute deploying
-git subtree push --prefix src/ heroku master  
-heroku run rails db:migrate
+## License
+MIT
