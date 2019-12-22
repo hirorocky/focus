@@ -6,7 +6,7 @@ export default {
       input_content: "",
       input_tag: "",
       input_context: "",
-      color: "",
+      color: ""
     };
   },
   methods: {

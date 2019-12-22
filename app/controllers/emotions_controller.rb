@@ -17,7 +17,7 @@ class EmotionsController < ApplicationController
     emotion = current_user.emotions.new(
       name: emotion_params[:name],
       color: emotion_params[:color],
-      context: emotion_params[:context],
+      context: emotion_params[:context]
     )
     if emotion.valid?
       comma_fragments = emotion_params[:fragments]
@@ -25,8 +25,8 @@ class EmotionsController < ApplicationController
         emotion.save!
         fragments = comma_fragments.map do |comma_fragment|
           tag, content = comma_fragment.split(',')
-          content = "" if content.nil?
-          {tag: tag, content: content}
+          content = '' if content.nil?
+          { tag: tag, content: content }
         end
         # tagの新規登録（validateによりかぶらないもののみ登録）+fragment登録
         fragments.each do |fragment|
@@ -36,11 +36,15 @@ class EmotionsController < ApplicationController
         end
       else
         flash[:danger] = 'フラグメント一つもがありません！'
-        redirect_to new_emotion_url and return
+        @emotion = Emotion.new(emotion_params)
+        @tags = current_user.tags
+        render new_emotion_path and return
       end
     else
       flash[:danger] = '入力フォームの情報が不足しています！'
-      redirect_to new_emotion_url and return
+      @emotion = Emotion.new(emotion_params)
+      @tags = current_user.tags
+      render new_emotion_path and return
     end
 
     flash[:success] = '新しいキモチを登録しました。'
