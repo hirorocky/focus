@@ -26,10 +26,8 @@
     <%= render "layouts/header" %>
 
     <div id="vue-top">
-      <!-- <v-app> -->
-
       <% flash.each do |message_type, message| %>
-      <article class="message is-<%= message_type %>" , style="margin-bottom: 0px">
+      <article class="message is-<%= message_type %>" style="margin-bottom: 0px">
         <div class="message-body">
           <%= message %>
         </div>
@@ -37,7 +35,6 @@
       <% end %>
 
       <%= yield %>
-      <!-- </v-app> -->
     </div>
 
     <%= render "layouts/footer" %>

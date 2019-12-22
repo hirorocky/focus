@@ -76,11 +76,7 @@
           </div>
 
           <%= f.label :color, 'キモチの色は何色ですか。', class: 'label' %>
-
-          <div class="d-flex justify-center">
-            <v-color-picker value="#ffffff" :flat="true" :hide-inputs="true" v-model="color"></v-color-picker>
-          </div>
-          <v-slider v-model="volume" label="Volume"></v-slider>
+          <%= f.color_field :color %>
 
           <%= f.submit %>
           <% end %>
