@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails','6.0'
+gem 'rails','6.0.2'
 gem "railties"
 gem 'puma'
 gem 'bcrypt'
