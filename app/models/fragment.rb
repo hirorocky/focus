@@ -17,7 +17,6 @@ class Fragment < ApplicationRecord
       auth_provider_x509_cert_url: cred.auth_provider_x509_cert_url,
       client_x509_cert_url: cred.client_x509_cert_url
     }
-    byebug
     @language ||= Google::Cloud::Language.new(credentials: cred_hash)
     response = @language.analyze_sentiment content: content, # ここに分析したい文章
                                           type: :PLAIN_TEXT
