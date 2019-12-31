@@ -23,6 +23,7 @@ gem 'webpacker'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'google-cloud-language'
 
 group :development, :test do
   gem 'byebug', '9.0.6', platform: :mri
