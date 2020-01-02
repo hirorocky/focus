@@ -5,7 +5,9 @@ AllCops:
     - "vendor/**/*" # rubocop config/default.yml
     - "db/schema.rb"
     - "Gemfile.lock"
+    - "bin/*"
 
+# -- Style --
 Style/AsciiComments:
   Enabled: false
 
@@ -15,6 +17,14 @@ Style/Documentation:
 Style/AndOr:
   Enabled: false
 
+# -- Layout --
+Layout/HashAlignment:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 100
+
+# -- Metrics --
 Metrics/MethodLength:
   Max: 20
   Exclude:

@@ -9,6 +9,15 @@ class Emotion < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :color, presence: true, format: { with: /\A#[a-f\d]{6}/i }
 
+  def emotion_score
+    scores = fragments.pluck(:score)
+    if scores.present?
+      scores.sum / scores.size
+    else
+      0
+    end
+  end
+
   def upcase_color
     color.upcase!
   end
