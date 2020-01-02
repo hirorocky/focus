@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
@@ -15,17 +17,56 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def downcase_email
-    self.email.downcase!
+    email.downcase!
   end
 
   def modify_black_name
-    self.name = "名無し" if self.name.blank?
+    self.name = '名無し' if name.blank?
   end
 
-  def todays_emotions(today=Time.zone.today)
+  def todays_emotions(today: Time.zone.today, limit: 4)
     emotions = self.emotions
-    max_pick = 4
-    pick_size = emotions.length <= max_pick ? emotions.length : max_pick
+    pick_size = emotions.length <= limit ? emotions.length : limit
     emotions.sample(pick_size, random: Random.new(today.to_time.to_i))
+  end
+
+  def recent_emotions(limit: 2)
+    emotions.where('created_at >= ?', half_of_years).sample(limit)
+  end
+
+  def previous_emotions(limit: 2)
+    emotions.where('created_at <= ?', half_of_years).sample(limit)
+  end
+
+  def positive_emotions(limit: 2)
+    result = nil
+    emotions.find_each do |emotion|
+      if emotion.emotion_score > 0.1
+        result ||= []
+        result << emotion
+      end
+    end
+    result.present? ? result.sample(limit) : nil
+  end
+
+  def negative_emotions(limit: 2)
+    result = nil
+    emotions.find_each do |emotion|
+      if emotion.emotion_score < -0.1
+        result ||= []
+        result << emotion
+      end
+    end
+    result.present? ? result.sample(limit) : nil
+  end
+
+  private
+
+  def half_of_years
+    sorted = emotions.order(created_at: :asc)
+    oldest = sorted.first.created_at
+    latest = sorted.last.created_at
+
+    oldest + (latest - oldest) / 2
   end
 end
