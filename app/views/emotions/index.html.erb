@@ -14,42 +14,46 @@
       </div>
     </div>
     <% else %>
-    <% @emotions.each do |emotion| %>
-    <% text_color = emotion_text_color(emotion.color) %>
-    <% color_class = emotion_text_color_class(emotion.color) %>
-    <div class="box" style="background-color: <%= emotion.color %>;">
-      <div class="media-content">
-        <div class="content">
-          <h4 class="title is-3 <%= color_class %>"><%= emotion.name %></h4>
-          <h6 class="subtitle is-6 <%= color_class %>"><%= emotion.created_at_with_format %></h6>
-          <div>
-            <h5 class="title is-5 <%= color_class %>">
-              <span class="icon"><i class="fas fa-users"></i></span>
-              状況</h5>
-            <h6 class="subtitle is-6 <%= color_class %>"><%= emotion.context %></h6>
-          </div>
-          <hr style="background-color: <%= text_color %>;">
-          <div>
-            <% emotion.fragments_tag_content_pairs.each do |fragment| %>
-            <div>
-              <h5 class="title is-5 <%= color_class %>">
-                <span class="icon"><i class="fas fa-tag"></i></span>
-                <%= fragment[:tag] %></h5>
-              <h6 class="subtitle is-6 <%= color_class %>"><%= fragment[:content] %></h6>
+    <div class="columns is-multiline">
+      <% @emotions.each do |emotion| %>
+      <div class="column is-half">
+        <% text_color = emotion_text_color(emotion.color) %>
+        <% color_class = emotion_text_color_class(emotion.color) %>
+        <div class="box" style="background-color: <%= emotion.color %>;">
+          <div class="media-content">
+            <div class="content">
+              <h4 class="title is-3 <%= color_class %>"><%= emotion.name %></h4>
+              <h6 class="subtitle is-6 <%= color_class %>"><%= emotion.created_at_with_format %></h6>
+              <div>
+                <h5 class="title is-5 <%= color_class %>">
+                  <span class="icon"><i class="fas fa-users"></i></span>
+                  状況</h5>
+                <h6 class="subtitle is-6 <%= color_class %>"><%= emotion.context %></h6>
+              </div>
+              <hr style="background-color: <%= text_color %>;">
+              <div>
+                <% emotion.fragments_tag_content_pairs.each do |fragment| %>
+                <div>
+                  <h5 class="title is-5 <%= color_class %>">
+                    <span class="icon"><i class="fas fa-tag"></i></span>
+                    <%= fragment[:tag] %></h5>
+                  <h6 class="subtitle is-6 <%= color_class %>"><%= fragment[:content] %></h6>
+                </div>
+                <% end %>
+              </div>
             </div>
-            <% end %>
+            <nav class="level-right">
+              <%= link_to "削除", emotion,
+                              method: :delete,
+                              data: { confirm: "キモチ「#{emotion.name}」を削除します。よろしいですか？"},
+                              class: "button is-dark"
+                  %>
+            </nav>
           </div>
         </div>
-        <nav class="level-right">
-          <%= link_to "削除", emotion,
-                          method: :delete,
-                          data: { confirm: "キモチ「#{emotion.name}」を削除します。よろしいですか？"},
-                          class: "button is-dark"
-              %>
-        </nav>
       </div>
+      <% end %>
+      <% end %>
     </div>
-    <% end %>
-    <% end %>
   </div>
 </section>
