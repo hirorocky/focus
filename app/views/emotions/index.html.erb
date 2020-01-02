@@ -7,53 +7,25 @@
       </div>
       <div class="level-right"><%= link_to 'キモチと向き合う', new_emotion_path, class: 'button is-link' %></div>
     </div>
-    <% if @emotions.count == 0 %>
-    <div class="level" id="introduce-create-emotion">
-      <div class="level-item">
-        まだキモチがありません。右上のボタンから新しいキモチを登録できます。
-      </div>
-    </div>
-    <% else %>
-    <div class="columns is-multiline">
-      <% @emotions.each do |emotion| %>
-      <div class="column is-half">
-        <% text_color = emotion_text_color(emotion.color) %>
-        <% color_class = emotion_text_color_class(emotion.color) %>
-        <div class="box" style="background-color: <%= emotion.color %>;">
-          <div class="media-content">
-            <div class="content">
-              <h4 class="title is-3 <%= color_class %>"><%= emotion.name %></h4>
-              <h6 class="subtitle is-6 <%= color_class %>"><%= emotion.created_at_with_format %></h6>
-              <div>
-                <h5 class="title is-5 <%= color_class %>">
-                  <span class="icon"><i class="fas fa-users"></i></span>
-                  状況</h5>
-                <h6 class="subtitle is-6 <%= color_class %>"><%= emotion.context %></h6>
-              </div>
-              <hr style="background-color: <%= text_color %>;">
-              <div>
-                <% emotion.fragments_tag_content_pairs.each do |fragment| %>
-                <div>
-                  <h5 class="title is-5 <%= color_class %>">
-                    <span class="icon"><i class="fas fa-tag"></i></span>
-                    <%= fragment[:tag] %></h5>
-                  <h6 class="subtitle is-6 <%= color_class %>"><%= fragment[:content] %></h6>
-                </div>
-                <% end %>
-              </div>
-            </div>
-            <nav class="level-right">
-              <%= link_to "削除", emotion,
-                              method: :delete,
-                              data: { confirm: "キモチ「#{emotion.name}」を削除します。よろしいですか？"},
-                              class: "button is-dark"
-                  %>
-            </nav>
-          </div>
+    <% if @categorized_emotions.count == 0 %>
+      <div class="level" id="introduce-create-emotion">
+        <div class="level-item">
+          まだキモチがありません。右上のボタンから新しいキモチを登録できます。
         </div>
       </div>
+    <% else %>
+      <% @categorized_emotions.each do |categorized| %>
+        <h4 class="is-4">
+          <%= categorized[:label] %>
+        </h4>
+        <div class="columns is-multiline">
+          <% categorized[:emotions].each do |emotion| %>
+            <div class="column is-half">
+              <%= render partial: 'emotion', locals: {emotion: emotion} %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </section>

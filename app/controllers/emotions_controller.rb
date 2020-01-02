@@ -2,7 +2,18 @@
 
 class EmotionsController < ApplicationController
   def index
-    @emotions = current_user.todays_emotions
+    @categorized_emotions = [
+      emotion_hash(label:    '最新のキモチ',
+                   emotions: current_user.emotions.order(created_at: :desc).limit(2)),
+      emotion_hash(label:    '新しめのキモチ',
+                   emotions: current_user.recent_emotions(limit: 2)),
+      emotion_hash(label:    '昔のキモチ',
+                   emotions: current_user.previous_emotions(limit: 2)),
+      emotion_hash(label:    'ポジティブめのキモチ',
+                   emotions: current_user.positive_emotions(limit: 2)),
+      emotion_hash(label:    'ネガティブめのキモチ',
+                   emotions: current_user.negative_emotions(limit: 2))
+    ].compact.shuffle
   end
 
   def index_all
@@ -64,6 +75,14 @@ class EmotionsController < ApplicationController
 
   def emotion_params
     params.require(:emotion).permit(:name, :color, :context, fragments: [])
+  end
+
+  def emotion_hash(label: '', emotions: nil)
+    if emotions.nil?
+      nil
+    else
+      { label: label, emotions: emotions }
+    end
   end
 
   def find_my_emotion(emotion_id)
