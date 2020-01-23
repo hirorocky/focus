@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'emotions', media: 'all' %>
+
 <section class="section">
   <div class="container">
     <h1 class="title is-hidden-desktop">キモチと向き合う</h1>
@@ -5,80 +7,97 @@
       <emotion-register-form inline-template>
         <div id="new-emotion-form">
           <%= form_with model: @emotion, local: true do |f| %>
-          <p class="has-text-weight-bold is-size-4-desktop">
-            <span class="icon is-large">
-              <i class="fas fa-lg fa-users"></i>
-            </span>
-            今あなたが置かれている状況を記入してください。
-          </p>
-          <div class="control">
-            <%= f.text_area :context, class: 'textarea' %><br>
-          </div>
-
-          <div id="create-emotion">
-            <p class="has-text-weight-bold is-size-4-desktop">
-              <span class="icon fa-lg is-large">
-                <i class="fas fa-puzzle-piece"></i>
-              </span>
-              状況に伴うキモチを小分けにして記入します。<br>
-              <article class="message is-primary">
-                <div class="message-body">
-                  「小分けにしたキモチ(<%= fragment_text_with_icon %>)」は「１単語で表せる感情(<%= tag_text_with_icon %>)」と「その詳細」で構成されます。
-                </div>
-              </article>
-            </p>
-
-            <div class="field is-grouped">
-              <p class="control">
-                <input class="input" v-model="input_tag" placeholder="1単語で表せる感情" />
+            <div class="field">
+              <p class="has-text-weight-bold is-size-4-desktop">
+                <span class="icon is-large">
+                  <i class="fas fa-lg fa-users"></i>
+                </span>
+                今あなたが置かれている状況を記入してください。
               </p>
-              <p class="control is-expanded">
-                <input class="input" v-model="input_content" placeholder="感情の詳細" />
-              </p>
-              <p class="control">
-                <a v-if="is_show_add_fragment_btn" class="button" v-on:click="addFragment">追加</a>
-              </p>
+              <div class="control">
+                <%= f.text_area :context, class: 'textarea' %>
+              </div>
             </div>
-            <strong>過去に入力したタグ：</strong>
-            <% @tags.map(&:name).each do |name| %>
-            <a class="has-text-primary" v-on:click="onTagSuggestClicked"><%= name %></a>
-            <% end %>
-            <br>
-          </div>
+            <div class="space"></div>
+            <div class="field">
+              <p class="has-text-weight-bold is-size-4-desktop">
+                <span class="icon fa-lg is-large">
+                  <i class="fas fa-puzzle-piece"></i>
+                </span>
+                状況に伴うキモチを小分けにして記入してください。<br>
+                <article class="message is-primary">
+                  <div class="message-body">
+                    「小分けにしたキモチは「１単語で表せる感情(<%= tag_text_with_icon %>)」と「その詳細」で構成されます。
+                  </div>
+                </article>
+              </p>
 
-          <div id="fragment-list">
-            <table class="table" style="margin: auto">
-              <thead>
-                <tr>
-                  <th><strong>タグ</strong></th>
-                  <th><strong>詳細</strong></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="fragment in fragments" v-bind:key="fragment.id">
-                  <th>{{ fragment.tag }}</th>
-                  <th>{{ fragment.content }}</th>
-                  <th><a v-on:click="deleteFragment(fragment)">
-                      <span class="icon has-text-danger">
-                        <i class="far fa-trash-alt"></i>
-                      </span>
-                    </a></th>
-                  <input type="hidden" name="emotion[fragments][]"
-                    v-bind:value="fragment.tag + ',' + fragment.content" />
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <%= f.label :name, 'キモチに名前をつけてみましょう。', class: 'label' %>
-          <div class="control">
-            <%= f.text_field :name, class: 'input' %>
-          </div>
+              <div class="field is-grouped">
+                <p class="control">
+                  <input class="input" v-model="input_tag" placeholder="1単語で表せる感情" />
+                </p>
+                <p class="control is-expanded">
+                  <input class="input" v-model="input_content" placeholder="感情の詳細" />
+                </p>
+                <p class="control">
+                  <a v-bind:disabled="is_disabled_add_fragment_btn" class="button is-link" v-on:click="addFragment">追加</a>
+                </p>
+              </div>
+              <strong>過去に入力したタグ：</strong>
+              <% @tags.map(&:name).each do |name| %>
+                <a class="has-text-primary" v-on:click="onTagSuggestClicked"><%= name %></a>
+              <% end %>
+              <br>
+            </div>
 
-          <%= f.label :color, 'キモチの色は何色ですか。', class: 'label' %>
-          <%= f.color_field :color %>
+            <div id="fragment-list">
+              <table class="table" style="margin: auto">
 
-          <%= f.submit %>
+                <tbody>
+                  <tr v-for="fragment in fragments" v-bind:key="fragment.id">
+                    <th>{{ fragment.tag }}</th>
+                    <th>{{ fragment.content }}</th>
+                    <th><a v-on:click="deleteFragment(fragment)">
+                        <span class="icon has-text-danger">
+                          <i class="far fa-trash-alt"></i>
+                        </span>
+                      </a></th>
+                    <input type="hidden" name="emotion[fragments][]"
+                      v-bind:value="fragment.tag + ',' + fragment.content" />
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <template v-if="fragments.length">
+              <div class="space"></div>
+
+              <div class="field">
+                <p class="has-text-weight-bold is-size-4-desktop">
+                  <span class="icon is-large">
+                    <i class="fas fa-lg fa-palette"></i>
+                  </span>
+                  キモチの色は何色ですか。
+                </p>
+                <color-pickr></color-pickr>
+              </div>
+              <div class="space"></div>
+
+              <div class="field">
+                <p class="has-text-weight-bold is-size-4-desktop">
+                  <span class="icon is-large">
+                    <i class="fas fa-lg fa-signature"></i>
+                  </span>
+                  キモチに名前をつけてみましょう。
+                </p>
+                <div class="control">
+                  <%= f.text_field :name, class: 'input' %>
+                </div>
+              </div>
+              <div class="space"></div>
+              <div class="field">
+                <%= f.submit class: 'button' %>
+              </div>
+            </template>
           <% end %>
         </div>
       </emotion-register-form>

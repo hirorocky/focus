@@ -4,7 +4,7 @@
   "dependencies": {
     "@mdi/font": "^4.5.95",
     "@rails/webpacker": "^4.0.7",
-    "@simonwep/pickr": "^1.4.6",
+    "@simonwep/pickr": "^1.5.0",
     "bulma-extensions": "^6.2.7",
     "material-design-icons-iconfont": "^5.0.1",
     "vue": "^2.6.10",
