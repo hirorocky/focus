@@ -1,4 +1,9 @@
+import ColorPickr from './color_pickr.vue'
+
 export default {
+  components: {
+    ColorPickr
+  },
   data: function () {
     return {
       fragments: [],
@@ -19,6 +24,8 @@ export default {
           content: this.input_content,
           id: this.nextId()
         });
+        this.input_tag = "";
+        this.input_content = "";
       }
     },
     nextId: function () {
@@ -33,13 +40,13 @@ export default {
     }
   },
   computed: {
-    is_show_add_fragment_btn: function () {
+    is_disabled_add_fragment_btn: function () {
       const tag = this.input_tag;
       const content = this.input_content;
       if (tag !== "" && content !== "") {
-        return true;
-      } else {
         return false;
+      } else {
+        return true;
       }
 
     }
