@@ -36,7 +36,7 @@ class EmotionsController < ApplicationController
       comma_fragments = emotion_params[:fragments]
       if comma_fragments
         emotion.save!
-        fragments = remove_comma(comma_fragments)
+        fragments = convert_to_fragment_hash(comma_fragments)
         # tagの新規登録（validateによりかぶらないもののみ登録）+fragment登録
         fragments.each do |fragment|
           current_user.tags.create(name: fragment[:tag])
@@ -51,7 +51,7 @@ class EmotionsController < ApplicationController
       end
     else
       flash[:danger] = '入力フォームの情報が不足しています！'
-      @emotion = Emotion.new(emotion_params)
+      @emotion = Emotion.new(emotion_params.except(:fragments))
       @tags = current_user.tags
       render new_emotion_path and return
     end
@@ -89,7 +89,7 @@ class EmotionsController < ApplicationController
     current_user.emotions.find_by(id: emotion_id)
   end
 
-  def remove_comma(comma_fragments)
+  def convert_to_fragment_hash(comma_fragments)
     comma_fragments.map do |comma_fragment|
       tag, content = comma_fragment.split(',')
       content = '' if content.nil?
