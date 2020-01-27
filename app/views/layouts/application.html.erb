@@ -27,11 +27,11 @@
 
     <div id="vue-top">
       <% flash.each do |message_type, message| %>
-      <article class="message is-<%= message_type %>" style="margin-bottom: 0px">
-        <div class="message-body">
-          <%= message %>
-        </div>
-      </article>
+        <article class="message is-<%= message_type %>" style="margin-bottom: 0px">
+          <div class="message-body">
+            <%= message %>
+          </div>
+        </article>
       <% end %>
 
       <%= yield %>
