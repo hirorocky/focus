@@ -30,7 +30,7 @@ export default {
             .getColor()
             .toRGBA()
             .splice(0, 3)
-            .map(x => Math.round(x).toString(16))
+            .map(x => ("0" + Math.round(x).toString(16)).slice(-2))
             .join("")
         );
       } else {
