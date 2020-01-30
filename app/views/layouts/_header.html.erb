@@ -17,24 +17,26 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <% current_page_style = 'background-color:#fee;font-weight:600' %>
-      <a class="navbar-item has-icons-left" href="<%= new_emotion_path %>"
-        style="<%= current_page_style if yield(:current_page)=='new_emotion' %>">
-        <span class="icon">
-          <i class="fas fa-hand-holding-heart"></i>
-        </span>
-        <span>
-          キモチと向き合う
-        </span>
-      </a>
-      <a class="navbar-item has-icons-left" href="<%= emotions_path %>"
-        style="<%= current_page_style if yield(:current_page)=='emotions' %>">
-        <span class="icon">
-          <i class="fas fa-book"></i>
-        </span>
-        <span>
-          キモチを懐かしむ
-        </span>
-      </a>
+      <% if user_signed_in? %>
+        <a class="navbar-item has-icons-left" href="<%= new_emotion_path %>"
+          style="<%= current_page_style if yield(:current_page)=='new_emotion' %>">
+          <span class="icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </span>
+          <span>
+            キモチと向き合う
+          </span>
+        </a>
+        <a class="navbar-item has-icons-left" href="<%= emotions_path %>"
+          style="<%= current_page_style if yield(:current_page)=='emotions' %>">
+          <span class="icon">
+            <i class="fas fa-book"></i>
+          </span>
+          <span>
+            キモチを懐かしむ
+          </span>
+        </a>
+      <% end %>
       <a class="navbar-item has-icons-left" href="/about"
         style="<%= current_page_style if yield(:current_page)=='about' %>">
         <span class="icon">
