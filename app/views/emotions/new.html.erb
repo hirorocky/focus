@@ -33,16 +33,16 @@
                 </article>
               </p>
 
-              <div class="field is-grouped">
-                <p class="control">
+              <div class="field">
+                <div class="control field">
                   <input class="input" v-model="input_tag" placeholder="1単語で表せる感情" />
-                </p>
-                <p class="control is-expanded">
-                  <input class="input" v-model="input_content" placeholder="感情の詳細" />
-                </p>
-                <p class="control">
+                </div>
+                <div class="control field">
+                  <textarea class="textarea" v-model="input_content" placeholder="感情の詳細"></textarea>
+                </div>
+                <div class="control has-text-right">
                   <a v-bind:disabled="is_disabled_add_fragment_btn" class="button is-link" v-on:click="addFragment">追加</a>
-                </p>
+                </div>
               </div>
               <strong>過去に入力したタグ：</strong>
               <% @tags.map(&:name).each do |name| %>
